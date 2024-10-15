@@ -1,0 +1,9 @@
+# TypeScript関連の一部ファイルを無視
+diagonosticMessages/
+lib.es2015.*
+
+# node_modulesなども無視
+node_modules/
+
+# その他無視したいファイルやディレクトリがあれば追記
+dist/
