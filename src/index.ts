@@ -1,4 +1,6 @@
 import { info, log } from "console";
+import { checkPrime } from "crypto";
+import { Input } from "postcss";
 
 const hello = (name: string): string => {
   return `Hello、${name}!!`;
@@ -273,3 +275,260 @@ type User2 = {
   name?: string;
   age: number;
 };
+
+type Cartype = string[];
+const cars: Cartype = ["フェラーリ", "ランボルギーニ", "ベンツ"];
+console.log(cars);
+
+type Gender3 = "male" | "female";
+type Stable = "Rittou" | "Miho";
+type HorseType = {
+  name: string;
+  age: number;
+  gender: Gender3;
+  stable: Stable;
+};
+const throubred1: HorseType = {
+  name: "ディープインパクト",
+  age: 4,
+  gender: "male",
+  stable: "Miho",
+};
+const throubred2: HorseType = {
+  name: "オルフェーヴル",
+  age: 4,
+  gender: "male",
+  stable: "Miho",
+};
+const throubred3: HorseType = {
+  name: "アーモンドアイ",
+  age: 3,
+  gender: "female",
+  stable: "Rittou",
+};
+
+console.log(throubred1);
+console.log(throubred2);
+console.log(throubred3);
+
+const sumPay = (num1: number, num2: number): number => {
+  return num1 + num2;
+};
+
+//====================================================================
+// in
+//====================================================================
+//オブジェクト内にあるプロパティやメソッドを絞り込むことgできる
+//プロパティの有無によって条件分岐を行う
+interface Tweet {
+  likedCount: number;
+}
+interface User3 {
+  name: string;
+}
+
+const getData = (input: Tweet | User3) => {
+  if ("likedCount" in input) {
+    return `いいね数: ${input.likedCount}`;
+  } else {
+    return `ユーザー名: ${input.name}`;
+  }
+};
+
+const tweet: Tweet = {
+  likedCount: 100,
+};
+console.log(getData(tweet)); //'いいね数: 100'
+
+const user: User3 = {
+  name: "Taro",
+};
+
+console.log(getData(user)); //'ユーザー名:Taro'
+
+interface Car {
+  color: string;
+}
+interface Airplane {
+  speed: number;
+}
+
+const judgeVehicle = (input: Car | Airplane) => {
+  if ("color" in input) {
+    return "Car";
+  } else {
+    return "Airplane";
+  }
+};
+console.log(
+  judgeVehicle({
+    color: "blue",
+  })
+);
+
+//====================================================================
+// instanceof
+//====================================================================
+//あるオブジェクトが指定したクラスのインスタンスであるかどうかを判定されるために使用される
+//1.どのクラスのインスタンスか判定
+class Dog {
+  constructor(public name: string) {}
+}
+class Cat {
+  constructor(public name: string) {}
+}
+const myDog = new Dog("リュウ");
+console.log(myDog instanceof Dog); //true
+
+const myCat = new Cat("リム");
+console.log(myCat instanceof Dog); //false
+
+//2.インスタンスを絞り込んで文字列を出力
+const isDog = (pet: Dog | Cat): void => {
+  if (pet instanceof Dog) {
+    console.log("犬です");
+  } else {
+    console.log("犬ではありません");
+  }
+};
+isDog(myDog); //犬です
+isDog(myCat); //犬ではないです
+
+//型ガード(in)
+
+type User4 = {
+  name: string;
+};
+type AdminUser = User4 & {
+  admin: boolean;
+};
+const judgeAdmin = (inputUser: User4 | AdminUser) => {
+  if ("admin" in inputUser) {
+    return "AdminUserです";
+  } else {
+    return "AdminUserではありません";
+  }
+};
+const user2: AdminUser = {
+  name: "Tom",
+  admin: true,
+};
+const user3: User4 = {
+  name: "Katy",
+};
+console.log(judgeAdmin(user2));
+console.log(judgeAdmin(user3));
+
+//型ガード(instanceof)
+class User5 {
+  constructor(public name: string) {}
+}
+class AdminUser2 extends User5 {
+  constructor(name: string, public admin: boolean) {
+    super(name);
+  }
+}
+const judgeAdmin2 = (inputUser2: User5 | AdminUser2) => {
+  if (inputUser2 instanceof AdminUser2) {
+    return "AdminUser2です";
+  } else {
+    return "AdminUser2ではありません";
+  }
+};
+
+const user4 = new AdminUser2("Tony", true);
+console.log(judgeAdmin2(user4));
+
+//====================================================================
+// ジェネリクス
+//====================================================================
+//型をパラメータとして受け取り、その型を使用してコードを書くことができる機能。これにより同じロジックを異なる型で再利用することができる。
+//ジェネリクスを使用することで汎用的で柔軟な型を作成することができる。
+//一般的にはtypeの頭文字である「T」を用いることが多い。
+
+//関数の引数と返り値に動的な型を指定する
+const checkValue = <T>(value: T): T => {
+  return value;
+};
+console.log(checkValue("Hello")); //Hello
+console.log(checkValue(32)); //32
+console.log(checkValue({ name: "Tom" })); //{name/ 'Tom'}
+
+//インターフェースのプロパティに動的な型を指定する
+interface User6<T, K> {
+  name: T;
+  age: K;
+}
+const user5: User6<string, number> = {
+  name: "Tod",
+  age: 40,
+};
+console.log(user5);
+
+const checkInput = <T>(Input1: T, input2: T): T => {
+  return input2;
+};
+console.log(checkInput("Hello", "World"));
+console.log(checkInput(1, 2));
+
+interface User7<T> {
+  name: string;
+  age: number;
+  id: T;
+}
+const user6: User7<number> = {
+  name: "Kate",
+  age: 32,
+  id: 123,
+};
+
+const user7: User7<string> = {
+  name: "Steve",
+  age: 35,
+  id: "abc",
+};
+console.log(user6);
+console.log(user7);
+
+//====================================================================
+// Partial<T>
+//====================================================================
+//Partialはオブジェクト型のすべてのプロパティを省略可能にすることができる。l￥これは、ある型の一部のプロパティだけを持つオブジェクトを作成した場合に非常に役に立つ。
+//Tというオブジェクト型のプロパティを省略可能にした型を生成
+interface User8 {
+  name: string;
+  age: number;
+}
+type PartialUser = Partial<User8>;
+
+type User9 = {
+  name: string;
+  age: number;
+};
+type PartialUser2 = Partial<User9>;
+const user8: PartialUser2 = {
+  name: "Scott",
+  age: 52,
+};
+const user9: PartialUser2 = {
+  name: "Nate",
+};
+console.log(user8);
+console.log(user9);
+
+type Post = {
+  id: number;
+  text?: string;
+  createdAt: Date;
+};
+type PartialPost = Partial<Post>;
+const post: PartialPost = {
+  id: 1,
+  text: "Hello",
+  createdAt: new Date(),
+};
+const post2: PartialPost = {
+  id: 1,
+};
+console.log(post);
+console.log(post2);

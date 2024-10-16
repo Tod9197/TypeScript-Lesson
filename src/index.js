@@ -1,4 +1,19 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var hello = function (name) {
     return "Hello\u3001".concat(name, "!!");
@@ -189,3 +204,185 @@ var numberFunction2 = function (count) {
 };
 numberFunction2(12);
 numberFunction2();
+var cars = ["フェラーリ", "ランボルギーニ", "ベンツ"];
+console.log(cars);
+var throubred1 = {
+    name: "ディープインパクト",
+    age: 4,
+    gender: "male",
+    stable: "Miho",
+};
+var throubred2 = {
+    name: "オルフェーヴル",
+    age: 4,
+    gender: "male",
+    stable: "Miho",
+};
+var throubred3 = {
+    name: "アーモンドアイ",
+    age: 3,
+    gender: "female",
+    stable: "Rittou",
+};
+console.log(throubred1);
+console.log(throubred2);
+console.log(throubred3);
+var sumPay = function (num1, num2) {
+    return num1 + num2;
+};
+var getData = function (input) {
+    if ("likedCount" in input) {
+        return "\u3044\u3044\u306D\u6570: ".concat(input.likedCount);
+    }
+    else {
+        return "\u30E6\u30FC\u30B6\u30FC\u540D: ".concat(input.name);
+    }
+};
+var tweet = {
+    likedCount: 100,
+};
+console.log(getData(tweet)); //'いいね数: 100'
+var user = {
+    name: "Taro",
+};
+console.log(getData(user)); //'ユーザー名:Taro'
+var judgeVehicle = function (input) {
+    if ("color" in input) {
+        return "Car";
+    }
+    else {
+        return "Airplane";
+    }
+};
+console.log(judgeVehicle({
+    color: "blue",
+}));
+//====================================================================
+// instanceof
+//====================================================================
+//あるオブジェクトが指定したクラスのインスタンスであるかどうかを判定されるために使用される
+//1.どのクラスのインスタンスか判定
+var Dog = /** @class */ (function () {
+    function Dog(name) {
+        this.name = name;
+    }
+    return Dog;
+}());
+var Cat = /** @class */ (function () {
+    function Cat(name) {
+        this.name = name;
+    }
+    return Cat;
+}());
+var myDog = new Dog("リュウ");
+console.log(myDog instanceof Dog); //true
+var myCat = new Cat("リム");
+console.log(myCat instanceof Dog); //false
+//2.インスタンスを絞り込んで文字列を出力
+var isDog = function (pet) {
+    if (pet instanceof Dog) {
+        console.log("犬です");
+    }
+    else {
+        console.log("犬ではありません");
+    }
+};
+isDog(myDog); //犬です
+isDog(myCat); //犬ではないです
+var judgeAdmin = function (inputUser) {
+    if ("admin" in inputUser) {
+        return "AdminUserです";
+    }
+    else {
+        return "AdminUserではありません";
+    }
+};
+var user2 = {
+    name: "Tom",
+    admin: true,
+};
+var user3 = {
+    name: "Katy",
+};
+console.log(judgeAdmin(user2));
+console.log(judgeAdmin(user3));
+//型ガード(instanceof)
+var User5 = /** @class */ (function () {
+    function User5(name) {
+        this.name = name;
+    }
+    return User5;
+}());
+var AdminUser2 = /** @class */ (function (_super) {
+    __extends(AdminUser2, _super);
+    function AdminUser2(name, admin) {
+        var _this = _super.call(this, name) || this;
+        _this.admin = admin;
+        return _this;
+    }
+    return AdminUser2;
+}(User5));
+var judgeAdmin2 = function (inputUser2) {
+    if (inputUser2 instanceof AdminUser2) {
+        return "AdminUser2です";
+    }
+    else {
+        return "AdminUser2ではありません";
+    }
+};
+var user4 = new AdminUser2("Tony", true);
+console.log(judgeAdmin2(user4));
+//====================================================================
+// ジェネリクス
+//====================================================================
+//型をパラメータとして受け取り、その型を使用してコードを書くことができる機能。これにより同じロジックを異なる型で再利用することができる。
+//ジェネリクスを使用することで汎用的で柔軟な型を作成することができる。
+//一般的にはtypeの頭文字である「T」を用いることが多い。
+//関数の引数と返り値に動的な型を指定する
+var checkValue = function (value) {
+    return value;
+};
+console.log(checkValue("Hello")); //Hello
+console.log(checkValue(32)); //32
+console.log(checkValue({ name: "Tom" })); //{name/ 'Tom'}
+var user5 = {
+    name: "Tod",
+    age: 40,
+};
+console.log(user5);
+var checkInput = function (Input1, input2) {
+    return input2;
+};
+console.log(checkInput("Hello", "World"));
+console.log(checkInput(1, 2));
+var user6 = {
+    name: "Kate",
+    age: 32,
+    id: 123,
+};
+var user7 = {
+    name: "Steve",
+    age: 35,
+    id: "abc",
+};
+console.log(user6);
+console.log(user7);
+var user8 = {
+    name: "Scott",
+    age: 52,
+};
+var user9 = {
+    name: "Nate",
+};
+console.log(user8);
+console.log(user9);
+var post = {
+    id: 1,
+    text: "Hello",
+    createdAt: new Date(),
+};
+var post2 = {
+    id: 1,
+};
+console.log(post);
+console.log(post2);
