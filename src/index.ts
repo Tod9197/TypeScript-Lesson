@@ -532,3 +532,37 @@ const post2: PartialPost = {
 };
 console.log(post);
 console.log(post2);
+
+//====================================================================
+// Required<T>
+//====================================================================
+//Requiredは、オブジェクト型の全てのプロパティを必須にすることができる。
+//例えばユーザー情報を扱う際に、名前と年齢の両方が必ず存在することを保証したい場合などに使う
+
+interface User10 {
+  name?: string;
+  age?: number;
+}
+type RequiredUser = Required<User10>;
+
+type User11 = {
+  name: string;
+  age?: number;
+};
+type RequiredUser2 = Required<User11>;
+const user10: RequiredUser2 = {
+  name: "ユーザー10",
+  age: 35,
+};
+console.log(user10);
+
+type Post2 = {
+  text?: string;
+  date?: Date;
+};
+type RequiredPost = Required<Post2>;
+const post3: RequiredPost = {
+  text: "コメント",
+  date: new Date(),
+};
+console.log(post3);

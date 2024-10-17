@@ -386,3 +386,13 @@ var post2 = {
 };
 console.log(post);
 console.log(post2);
+var user10 = {
+    name: "ユーザー10",
+    age: 35,
+};
+console.log(user10);
+var post3 = {
+    text: "コメント",
+    date: new Date(),
+};
+console.log(post3);
