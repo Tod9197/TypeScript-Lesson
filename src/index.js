@@ -396,3 +396,62 @@ var post3 = {
     date: new Date(),
 };
 console.log(post3);
+var myson = {
+    name: "Ryan",
+};
+console.log(myson);
+var myDaughter = {
+    name: "Julian",
+    age: 12,
+};
+console.log(myDaughter);
+var red = {
+    red: 255,
+};
+var worker = {
+    id: 3,
+};
+console.log(worker);
+var worker2 = {
+    id: 1,
+    name: "Jeff",
+};
+console.log(worker2);
+var mySon2 = {
+    name: "Harry",
+    age: 5,
+    work: "student",
+};
+console.log(mySon2);
+var myDaughter2 = {
+    name: "Mary",
+    age: 13,
+};
+console.log(myDaughter2);
+var worker3 = {
+    name: "Bob",
+    age: 55,
+};
+console.log(worker3);
+var worker4 = {
+    age: 35,
+};
+console.log(worker4);
+var worker5 = {
+    name: "Josh",
+    age: 77,
+};
+console.log(worker5);
+var worker6 = {
+    name: "Mike",
+    age: 44,
+};
+var worker7 = {
+    name: "Dyan",
+};
+var worker8 = {
+    age: 19,
+};
+console.log(worker6);
+console.log(worker7);
+console.log(worker8);

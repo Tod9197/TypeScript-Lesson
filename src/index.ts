@@ -566,3 +566,143 @@ const post3: RequiredPost = {
   date: new Date(),
 };
 console.log(post3);
+
+//====================================================================
+// Pick
+//====================================================================
+//Pickは指定したプロパティのみを取り出すことができる。
+//オブジェクトのみを持つ新しい型を作成する際に使われる。
+interface Person2 {
+  name: string;
+  age: number;
+  work: string;
+  income: number;
+}
+
+type Child = Pick<Person, "name">;
+
+const myson: Child = {
+  name: "Ryan",
+};
+console.log(myson);
+
+interface Person3 {
+  name: string;
+  age: number;
+  work: string;
+  income: number;
+}
+
+type Child2 = Pick<Person2, "name" | "age">;
+const myDaughter: Child2 = {
+  name: "Julian",
+  age: 12,
+};
+console.log(myDaughter);
+
+interface Color {
+  red: number;
+  green: number;
+  blue: number;
+}
+type RedColor = Pick<Color, "red">;
+const red: RedColor = {
+  red: 255,
+};
+
+type Worker = {
+  id: number;
+  name: string;
+  age: number;
+};
+
+type PickId = Pick<Worker, "id">;
+const worker: PickId = {
+  id: 3,
+};
+console.log(worker);
+
+type PickIdName = Pick<Worker, "id" | "name">;
+const worker2: PickIdName = {
+  id: 1,
+  name: "Jeff",
+};
+console.log(worker2);
+
+//====================================================================
+// Omit
+//====================================================================
+//Omitは指定したプロパティを除外した型を作成する。
+//オブジェクトの一部のプロパティを除外して新しい型を作成する時に使われる
+interface Person3 {
+  name: string;
+  age: number;
+  work: string;
+  income: number;
+}
+type Child3 = Omit<Person3, "income">;
+const mySon2: Child3 = {
+  name: "Harry",
+  age: 5,
+  work: "student",
+};
+console.log(mySon2);
+
+type Child4 = Omit<Person3, "work" | "income">;
+const myDaughter2: Child4 = {
+  name: "Mary",
+  age: 13,
+};
+console.log(myDaughter2);
+
+type Worker2 = {
+  id: string;
+  name: string;
+  age: number;
+};
+
+type OmitId = Omit<Worker2, "id">;
+const worker3: OmitId = {
+  name: "Bob",
+  age: 55,
+};
+console.log(worker3);
+
+type OmitidName = Omit<Worker, "id" | "name">;
+const worker4: OmitidName = {
+  age: 35,
+};
+console.log(worker4);
+
+type Worker3 = {
+  id: string;
+  name?: string;
+  age?: number;
+};
+type RequiredNameAge = Required<Pick<Worker3, "name" | "age">>;
+const worker5: RequiredNameAge = {
+  name: "Josh",
+  age: 77,
+};
+console.log(worker5);
+
+type Worker4 = {
+  id: number;
+  name: string;
+  age: number;
+};
+
+type PartialNameAge = Partial<Pick<Worker4, "name" | "age">>;
+const worker6: PartialNameAge = {
+  name: "Mike",
+  age: 44,
+};
+const worker7: PartialNameAge = {
+  name: "Dyan",
+};
+const worker8: PartialNameAge = {
+  age: 19,
+};
+console.log(worker6);
+console.log(worker7);
+console.log(worker8);
