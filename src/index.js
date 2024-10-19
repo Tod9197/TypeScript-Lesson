@@ -455,3 +455,90 @@ var worker8 = {
 console.log(worker6);
 console.log(worker7);
 console.log(worker8);
+var newUnionType = 7;
+var newUnionType2 = "apple";
+console.log(newUnionType);
+console.log(newUnionType2);
+var newFruit = "apple";
+console.log(newFruit);
+var notFunction = 2;
+var notFunction2 = true;
+var notFunction3 = function () { return 2; };
+var notFunction4 = function () { };
+console.log(notFunction);
+console.log(notFunction2);
+var excludedUnionType = true;
+var excludedUnionType2 = 3;
+console.log(excludedUnionType);
+console.log(excludedUnionType2);
+var excludedStatus = "success";
+console.log(excludedStatus);
+var newUnionType3 = "Good Morning!";
+var newUnionType4 = false;
+console.log(newUnionType3);
+console.log(newUnionType4);
+var normalFunction = function () { return console.log("hoge"); };
+var numberFunction3 = function () { return 73; };
+normalFunction();
+console.log(numberFunction3());
+var student = {
+    type: "student",
+    name: "David",
+    grade: 16,
+};
+console.log(student);
+var extractUnionType = "Good Evenig";
+var extractUnionType2 = 35;
+console.log(extractUnionType);
+console.log(extractUnionType2);
+var car2 = {
+    type: "car",
+    wheels: 4,
+    country: "Japan",
+};
+console.log(car2);
+var user11 = {
+    name: "Jhon",
+    age: 22,
+};
+console.log(user11.name);
+var user14 = {
+    id: 12,
+    name: "Karen",
+    age: 22,
+};
+console.log(user14);
+var post4 = {
+    id: 7,
+    title: "Dragon Ball",
+    content: "孫悟空と仲間の冒険劇",
+};
+console.log(post4);
+var unionType6 = "How are you?";
+console.log(unionType6);
+var userId = 76;
+console.log(userId);
+//====================================================================
+// Parameters
+//====================================================================
+//関数の引数を取得することができる。
+//生成される型はタプル型になる
+var createMessage = function (name, age) {
+    return "".concat(name, "\u3055\u3093\u306F").concat(age, "\u6B73\u3067\u3059");
+};
+// const foo: Hoge4 = [22, "Mark"];//エラー
+var bar = ["Mark", 22];
+console.log(bar);
+var stringFunction2 = function (arg) {
+    console.log(arg);
+};
+var parametersStringFunction = [
+    "How have you been?",
+];
+console.log(parametersStringFunction);
+var multipleFunction = function (arg1, arg2) {
+    console.log(arg1);
+    console.log(arg2);
+};
+var parametersMultipleFunction = [1, true];
+console.log(parametersMultipleFunction);

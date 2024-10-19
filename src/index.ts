@@ -706,3 +706,229 @@ const worker8: PartialNameAge = {
 console.log(worker6);
 console.log(worker7);
 console.log(worker8);
+
+//====================================================================
+// Exclude
+//====================================================================
+//1つの型(型T)からもう一つの型(型U)に存在する項目を除外することができる。
+//これは主に複数の型を1つにまとめた「ユニオン型」に対して使われる。
+//基本的には取り除く型を1つずつ指定するが、関数の型についてはFunction型で一括で取り除くことができる。
+type UnionType = string | number | boolean;
+type NewUnionType = Exclude<UnionType, boolean>;
+
+const newUnionType: NewUnionType = 7;
+const newUnionType2: NewUnionType = "apple";
+
+console.log(newUnionType);
+console.log(newUnionType2);
+
+type Fruit = "apple" | "orange" | "banana";
+type NewFruit = Exclude<Fruit, "orange" | "banana">;
+
+const newFruit: NewFruit = "apple";
+console.log(newFruit);
+
+//関数型を取り除く
+type Hoge = number | boolean | (() => void) | (() => number);
+type NotFunction = Exclude<Hoge, Function>;
+
+const notFunction: NotFunction = 2;
+const notFunction2: NotFunction = true;
+const notFunction3: Hoge = () => 2;
+const notFunction4: Hoge = () => {};
+console.log(notFunction);
+console.log(notFunction2);
+
+type UnionType2 = string | number | boolean;
+type ExcludeUnionType = Exclude<UnionType2, string>;
+
+const excludedUnionType: ExcludeUnionType = true;
+const excludedUnionType2: ExcludeUnionType = 3;
+console.log(excludedUnionType);
+console.log(excludedUnionType2);
+
+type Status = "loading" | "success" | "false";
+type ExcludedStatus = Exclude<Status, "loading" | "error">;
+
+const excludedStatus: ExcludedStatus = "success";
+console.log(excludedStatus);
+
+//====================================================================
+// Extract
+//====================================================================
+//1つの型(型T)ともう一つの型(型U)の両方に存在する項目を抽出することができる。
+//これは主に複数の型を1つにまとめた「ユニオン型」に対して使われる。
+//基本的には1つずつ項目を指定するが、関数の型はFunction型で一括で指定することができる
+
+type UnionType3 = string | number | boolean;
+type NewUnionType2 = Extract<UnionType3, string | boolean>;
+
+const newUnionType3: NewUnionType2 = "Good Morning!";
+const newUnionType4: NewUnionType2 = false;
+console.log(newUnionType3);
+console.log(newUnionType4);
+
+//関数型を取り出す
+//数値型、真偽値型、戻り値のない関数型、戻り値が数値型の関数を持つユニオン型
+
+type Hoge2 = number | boolean | (() => void) | (() => number);
+type IsFunction = Extract<Hoge2, Function>;
+
+const normalFunction: IsFunction = () => console.log("hoge");
+const numberFunction3: IsFunction = () => 73;
+normalFunction();
+console.log(numberFunction3());
+
+//オブジェクトの型を取り出す
+type Person4 =
+  | {
+      type: "student";
+      name: string;
+      grade: number;
+    }
+  | {
+      type: "teacher";
+      age: number;
+      subject: string;
+    };
+
+type Student = Extract<Person4, { type: "student" }>;
+const student: Student = {
+  type: "student",
+  name: "David",
+  grade: 16,
+};
+console.log(student);
+
+type UnionType4 = string | number | boolean;
+type ExtractUnionType = Extract<UnionType4, string | number>;
+
+const extractUnionType: ExtractUnionType = "Good Evenig";
+const extractUnionType2: ExcludeUnionType = 35;
+console.log(extractUnionType);
+console.log(extractUnionType2);
+
+type Vechile =
+  | {
+      type: "car";
+      wheels: number;
+      country: string;
+    }
+  | {
+      type: "bicycle";
+      wheels: number;
+    }
+  | {
+      type: "airplane";
+      distance: number;
+      country: string;
+    };
+
+type Car2 = Extract<Vechile, { type: "car" }>;
+const car2: Car2 = {
+  type: "car",
+  wheels: 4,
+  country: "Japan",
+};
+console.log(car2);
+
+//====================================================================
+// Readonly<T>
+//====================================================================
+//Readonlyはオブジェクトのすべてのプロパティを読み取り専用にする
+//読み取り専用のプロパティの値は変更することができなくなる
+
+interface User12 {
+  name: string;
+  age?: number;
+}
+type NotChangeUser = Readonly<User12>;
+const user11: NotChangeUser = {
+  name: "Jhon",
+  age: 22,
+};
+console.log(user11.name);
+
+// user11.name = "Mike";//エラー
+
+type User13 = {
+  id: number;
+  name: string;
+  age: number;
+};
+type ReadonlyUser = Readonly<User13>;
+
+const user14: ReadonlyUser = {
+  id: 12,
+  name: "Karen",
+  age: 22,
+};
+console.log(user14);
+
+type Post3 = {
+  id: number;
+  readonly title: string;
+  content: string;
+};
+type ReadonlyPost = Readonly<Post3>;
+const post4: ReadonlyPost = {
+  id: 7,
+  title: "Dragon Ball",
+  content: "孫悟空と仲間の冒険劇",
+};
+console.log(post4);
+
+//====================================================================
+// NonNullable
+//====================================================================
+//与えられた型からnullとundefinedを取り除く
+
+type Hoge3 = string | number | null | undefined;
+type Fuga = NonNullable<Hoge3>;
+
+type UnionType5 = string | number | null | undefined;
+type NonNullableUnionType = NonNullable<UnionType5>;
+
+const unionType6: NonNullableUnionType = "How are you?";
+console.log(unionType6);
+
+type User14 = {
+  id: number | null;
+  name: string;
+  age: number;
+};
+type NonNullableId = NonNullable<User14["id"]>;
+const userId: NonNullableId = 76;
+console.log(userId);
+
+//====================================================================
+// Parameters
+//====================================================================
+//関数の引数を取得することができる。
+//生成される型はタプル型になる
+const createMessage = (name: string, age: number) => {
+  return `${name}さんは${age}歳です`;
+};
+type Hoge4 = Parameters<typeof createMessage>;
+
+// const foo: Hoge4 = [22, "Mark"];//エラー
+const bar: Hoge4 = ["Mark", 22];
+console.log(bar);
+
+const stringFunction2 = (arg: string) => {
+  console.log(arg);
+};
+type ParametersStringFunction = Parameters<typeof stringFunction2>;
+const parametersStringFunction: ParametersStringFunction = [
+  "How have you been?",
+];
+console.log(parametersStringFunction);
+
+const multipleFunction = (arg1: number, arg2: boolean) => {
+  console.log(arg1);
+  console.log(arg2);
+};
+
+type ParametersMultipleFunction = Parameters<typeof multipleFunction>;
+const parametersMultipleFunction: ParametersMultipleFunction = [1, true];
+console.log(parametersMultipleFunction);
