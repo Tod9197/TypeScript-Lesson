@@ -932,3 +932,51 @@ const multipleFunction = (arg1: number, arg2: boolean) => {
 type ParametersMultipleFunction = Parameters<typeof multipleFunction>;
 const parametersMultipleFunction: ParametersMultipleFunction = [1, true];
 console.log(parametersMultipleFunction);
+
+//====================================================================
+// ReturnType
+//====================================================================
+//関数の戻り値の型を取得することできる
+const fullName = (last: string, first: string): string => `${last} ${first}`;
+type Hoge5 = ReturnType<typeof fullName>;
+
+const bar2: Hoge5 = "bar";
+console.log(bar2);
+
+const stringFunction3 = () => {
+  return "Hey!";
+};
+type ReturnTypeStringFunction = ReturnType<typeof stringFunction3>;
+const returnTypeStringFunction: ReturnTypeStringFunction = "Look!";
+console.log(returnTypeStringFunction);
+
+const multipleFunction2 = () => {
+  return [7, false];
+};
+type ReturnTypeMultipleFunction = ReturnType<typeof multipleFunction2>;
+const returnTypeMultipleFunction: ReturnTypeMultipleFunction = [59, 55];
+console.log(returnTypeMultipleFunction);
+
+const userFunction = (user: { name: string; age: number }) => {
+  return user;
+};
+type UserFunction = Parameters<typeof userFunction>[0];
+const user15: UserFunction = {
+  name: "Mark",
+  age: 41,
+};
+console.log(user15);
+
+const userFunction2 = () => {
+  return {
+    id: 8,
+    name: "Jane",
+  };
+};
+type UserFunction2 = ReturnType<typeof userFunction2>;
+type ReadonlyUserFunction2 = Readonly<UserFunction2>;
+const user16: ReadonlyUserFunction2 = {
+  id: 17,
+  name: "Carl",
+};
+console.log(user16);

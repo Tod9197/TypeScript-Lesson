@@ -542,3 +542,39 @@ var multipleFunction = function (arg1, arg2) {
 };
 var parametersMultipleFunction = [1, true];
 console.log(parametersMultipleFunction);
+//====================================================================
+// ReturnType
+//====================================================================
+//関数の戻り値の型を取得することできる
+var fullName = function (last, first) { return "".concat(last, " ").concat(first); };
+var bar2 = "bar";
+console.log(bar2);
+var stringFunction3 = function () {
+    return "Hey!";
+};
+var returnTypeStringFunction = "Look!";
+console.log(returnTypeStringFunction);
+var multipleFunction2 = function () {
+    return [7, false];
+};
+var returnTypeMultipleFunction = [59, 55];
+console.log(returnTypeMultipleFunction);
+var userFunction = function (user) {
+    return user;
+};
+var user15 = {
+    name: "Mark",
+    age: 41,
+};
+console.log(user15);
+var userFunction2 = function () {
+    return {
+        id: 8,
+        name: "Jane",
+    };
+};
+var user16 = {
+    id: 17,
+    name: "Carl",
+};
+console.log(user16);
